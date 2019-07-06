@@ -1,0 +1,12 @@
+[package]
+name = "booru_api"
+version = "0.1.0"
+authors = ["insomnyawolf <insomnyawolf@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+reqwest = "*"
+percent-encoding = "*"
+serde = "*"
+serde_derive = "*"
+serde_json = "*"
