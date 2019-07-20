@@ -6,7 +6,6 @@ use crate::server::TargetApi;
 
 
 use percent_encoding::{percent_encode, utf8_percent_encode, SIMPLE_ENCODE_SET};
-use std::error::Error;
 
 #[derive(Debug, Default)]
 pub struct BooruRequest {
@@ -104,13 +103,15 @@ impl BooruRequest {
             Ok(mut v) => {
                 match v.text(){
                     Ok(data) => {
-                        match serde_json::from_str(&data) {
-                            Ok(value) => {
-                                let v: Vec<BooruResponse> = value;
-                                return Some(v);
-                            }
-                            Err(e) => {
-                                println!("{:?}", e);
+                        if !data.is_empty() {
+                            match serde_json::from_str(&data) {
+                                Ok(value) => {
+                                    let v: Vec<BooruResponse> = value;
+                                    return Some(v);
+                                }
+                                Err(e) => {
+                                    println!("{:?}", e);
+                                }
                             }
                         }
                     }
