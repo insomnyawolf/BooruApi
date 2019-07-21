@@ -4,22 +4,54 @@ use crate::rating::Rating;
 use crate::response::BooruResponse;
 use crate::server::TargetApi;
 
-
-use percent_encoding::{percent_encode, utf8_percent_encode, SIMPLE_ENCODE_SET};
-
 #[derive(Debug, Default)]
 pub struct BooruRequest {
+    /// I think the name is autodescriptive enought on this
+    /// ¯\_(ツ)_/¯
     pub tags: Option<Vec<String>>, // Done
+    /// Retrieve post by id
     pub id: Option<i64>,           // Done
+    /// Ask api for post before specific id
     pub id_before: Option<i64>,    // Done
+    /// Ask api for post after specific id
     pub id_after: Option<i64>,     // Done
-    pub random_order: bool,        // Done //Fails on gelboru?
+    /// Request a randomized post including the other tags
+    /// Works Only On Moebooru Based Servers
+    ///
+    /// * Konachan
+    /// * Yandere
+    ///
+    /// Fails on
+    ///
+    /// * Gelbooru
+    /// * TBIB
+    /// * Rule34
+    /// * Safebooru
+    ///
+    pub random_order: bool,        // Done
+    /// Image Rating, May be:
+    ///
+    /// * Any
+    /// * Safe
+    /// * QuestionablePG
+    /// * Questionable
+    /// * QuestionableExplicit
+    /// * Explicit
+    ///
     pub rating: Rating,            // Done
+    /// Height Image Dimensions
+    /// By default it will be Any
     pub height: Option<i64>,       // Done
+    /// Width Image Dimensions
     pub width: Option<i64>,        // Done
+    /// Ask the api for images with a specific score
     pub score: Option<f64>,        // Done
+    /// Ask the api for images above the score value
     pub score_min: Option<f64>,    // Done
+    /// Defines how much post should request to the api
     pub max_results: Option<i64>,  // Done
+    /// Wich api will be used in the request
+    /// By default Gelbooru
     pub target_api: TargetApi,     // Done
     pub server_type: Option<i64>,  // Check If needed
     pub url: Option<String>,       // Check If Needed
